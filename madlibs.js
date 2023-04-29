@@ -27,44 +27,38 @@
  * Please go through this lesson: https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/
  */
 function parseStory(rawStory) {
-    const regex = /(\w+\[\w+\]|\w+|\W)/g;
-    let wordsObject = rawStory.match(regex).filter(item => item.trim() !== '');
-    // console.log(wordsObject);
-    
-    let outputObject = []
+  const regex = /(\w+\[\w+\]|\w+|\W)/g;
+  let wordsObject = rawStory.match(regex).filter((item) => item.trim() !== "");
+  // console.log(wordsObject);
 
-    for (let i= 0 ; i < wordsObject.length ; i += 1){
-        let currentWord = wordsObject[i]
-        let currentPos = ""
-        let element = {}
-        if ((currentWord[currentWord.length-1]) === "]" ){
-            if ((currentWord[currentWord.length-2]) === "n" ){
-                currentPos = "noun"
-            }
-            if ((currentWord[currentWord.length-2]) === "v" ){
-                currentPos = "verb"
-            }
-            if ((currentWord[currentWord.length-2]) === "a" ){
-                currentPos = "adj"
-            }
-            
-            element.word = currentWord.slice(0, -3)
-            element.pos = currentPos
-            outputObject.push(element)
-        }else{
-            element.word = currentWord
-            outputObject.push(element)
+  let outputObject = [];
 
+  for (let i = 0; i < wordsObject.length; i += 1) {
+    let currentWord = wordsObject[i];
+    let currentPos = "";
+    let element = {};
+    if (currentWord[currentWord.length - 1] === "]") {
+      if (currentWord[currentWord.length - 2] === "n") {
+        currentPos = "noun";
+      }
+      if (currentWord[currentWord.length - 2] === "v") {
+        currentPos = "verb";
+      }
+      if (currentWord[currentWord.length - 2] === "a") {
+        currentPos = "adj";
+      }
 
-        }
-
+      element.word = currentWord.slice(0, -3);
+      element.pos = currentPos;
+      outputObject.push(element);
+    } else {
+      element.word = currentWord;
+      outputObject.push(element);
     }
+  }
 
-    return outputObject
-    
-
-  // Your code here.
-//   return {}; // This line is currently wrong :)
+  return outputObject;
+  //   return {}; // This line is currently wrong :)
 }
 
 /**
@@ -81,5 +75,36 @@ function parseStory(rawStory) {
 getRawStory()
   .then(parseStory)
   .then((processedStory) => {
-    console.log(processedStory);
+    const container = document.createElement("div");
+    container.classList.add("container");
+    document.body.appendChild(container);
+    const paragraph = document.createElement("p");
+    container.appendChild(paragraph);
+
+    let storyInput = processedStory;
+    for (let index = 0; index < storyInput.length; index++) {
+      const element = storyInput[index];
+      if (element.pos) {
+        const input = document.createElement("input");
+        input.classList.add("user-input");
+        input.placeholder = element.pos;
+        paragraph.appendChild(input);
+      } else {
+        const text = document.createElement("span");
+        text.textContent = ` ${element.word} `;
+        paragraph.appendChild(text);
+      }
+    }
+
+    const inputObj = document.querySelectorAll(".user-input");
+    let textValue = "";
+    for (const input of inputObj) {
+      input.addEventListener("input", (e) => {
+        textValue = input.value;
+        console.log(textValue);
+      });
+    }
+
+    // console.log(storyInput);
+    // console.log(processedStory);
   });
