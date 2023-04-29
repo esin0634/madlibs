@@ -27,8 +27,9 @@
  * Please go through this lesson: https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/
  */
 function parseStory(rawStory) {
-    let wordsObject = rawStory.split(/[\s,.'\[\]]+/).filter(Boolean)
-    debugger;
+    const regex = /(\w+\[\w+\]|\w+|\W)/g;
+    let wordsObject = rawStory.match(regex).filter(item => item.trim() !== '');
+    // console.log(wordsObject);
     
     let outputObject = []
 
@@ -46,15 +47,20 @@ function parseStory(rawStory) {
             if ((currentWord[currentWord.length-2]) === "a" ){
                 currentPos = "adj"
             }
+            
+            element.word = currentWord.slice(0, -3)
+            element.pos = currentPos
+            outputObject.push(element)
+        }else{
+            element.word = currentWord
+            outputObject.push(element)
+
+
         }
-        
-        element.word = currentWord
-        element.pos = currentPos
-        outputObject.push(element)
 
     }
 
-    console.log(outputObject)
+    return outputObject
     
 
   // Your code here.
