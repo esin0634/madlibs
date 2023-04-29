@@ -27,8 +27,38 @@
  * Please go through this lesson: https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/
  */
 function parseStory(rawStory) {
+    let wordsObject = rawStory.split(/[\s,.'\[\]]+/).filter(Boolean)
+    debugger;
+    
+    let outputObject = []
+
+    for (let i= 0 ; i < wordsObject.length ; i += 1){
+        let currentWord = wordsObject[i]
+        let currentPos = ""
+        let element = {}
+        if ((currentWord[currentWord.length-1]) === "]" ){
+            if ((currentWord[currentWord.length-2]) === "n" ){
+                currentPos = "noun"
+            }
+            if ((currentWord[currentWord.length-2]) === "v" ){
+                currentPos = "verb"
+            }
+            if ((currentWord[currentWord.length-2]) === "a" ){
+                currentPos = "adj"
+            }
+        }
+        
+        element.word = currentWord
+        element.pos = currentPos
+        outputObject.push(element)
+
+    }
+
+    console.log(outputObject)
+    
+
   // Your code here.
-  return {}; // This line is currently wrong :)
+//   return {}; // This line is currently wrong :)
 }
 
 /**
