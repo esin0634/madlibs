@@ -1,6 +1,41 @@
 /**
  * Your CSS goes here.
  */
+
+ *{
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+   font-family: Rubik ;
+}
+
+ body {
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+   align-items: center;
+   min-height: 100vh;
+   background-color: #F6FFDE;
+ }
  .container {
     background-color: aquamarine;
+    max-width: 100%;
+    width: 50%;
+    margin: 2rem;
+    padding: 1.2rem;
+    background-color: #C9DBB2;
+    border-radius: 10px;
+    line-height:25px;
+ }
+ .user-input {
+   background-color: #F6FFDE;
+   border: 0.3px solid slategray;
+   text-align: center;
+   text-transform: uppercase;
+   padding: 3px 0;
+ }
+ .yet-to-be-filled {
+   background-color: #F6FFDE;
+   padding: 3px 0;
+   width: 50px;
  }

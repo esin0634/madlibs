@@ -45,7 +45,7 @@ function parseStory(rawStory) {
         currentPos = "verb";
       }
       if (currentWord[currentWord.length - 2] === "a") {
-        currentPos = "adj";
+        currentPos = "adjective";
       }
 
       element.word = currentWord.slice(0, -3);
@@ -75,9 +75,8 @@ function parseStory(rawStory) {
 getRawStory()
   .then(parseStory)
   .then((processedStory) => {
-    const container = document.createElement("div");
+    const container = document.querySelector(".madLibsEdit");
     container.classList.add("container");
-    document.body.appendChild(container);
     const paragraph = document.createElement("p");
     container.appendChild(paragraph);
 
@@ -98,9 +97,8 @@ getRawStory()
 
     // boş story ------
 
-    const storyContainer = document.createElement("div");
+    const storyContainer = document.querySelector(".madLibsPreview");
     storyContainer.classList.add("container");
-    document.body.appendChild(storyContainer);
     const storyParagraph = document.createElement("p");
     storyContainer.appendChild(storyParagraph);
     const inputArr = document.querySelectorAll(".user-input");
@@ -110,12 +108,12 @@ getRawStory()
       if (!element.pos) {
         const text = document.createElement("span");
         text.textContent = ` ${element.word} `;
-        paragraph.appendChild(text);
+        storyParagraph.appendChild(text);
       } else {
         const yetToBeFilled = document.createElement("span");
         yetToBeFilled.classList.add("yet-to-be-filled");
-        yetToBeFilled.textContent = ` ${element.word} `;
-        paragraph.appendChild(yetToBeFilled);
+        yetToBeFilled.textContent = "_____";
+        storyParagraph.appendChild(yetToBeFilled);
       }
     }
     const yetToBeFilledArray = document.querySelectorAll(".yet-to-be-filled");
