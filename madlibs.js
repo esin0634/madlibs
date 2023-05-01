@@ -89,6 +89,7 @@ getRawStory()
         input.classList.add("user-input");
         input.placeholder = element.pos;
         paragraph.appendChild(input);
+
       } else {
         const text = document.createElement("span");
         text.textContent = ` ${element.word} `;
@@ -96,15 +97,43 @@ getRawStory()
       }
     }
 
-    const inputObj = document.querySelectorAll(".user-input");
-    let textValue = "";
-    for (const input of inputObj) {
-      input.addEventListener("input", (e) => {
-        textValue = input.value;
-        console.log(textValue);
-      });
-    }
+    // boş story ------
 
-    // console.log(storyInput);
+    const storyContainer = document.createElement("div");
+    storyContainer.classList.add("container");
+    document.body.appendChild(storyContainer);
+    const storyParagraph = document.createElement("p");
+    storyContainer.appendChild(storyParagraph);
+
+    
+    for (let index = 0; index < storyInput.length; index++) {
+      const element = storyInput[index];
+        const text = document.createElement("span");
+        text.textContent = ` ${element.word} `;
+        paragraph.appendChild(text);
+      
+    }
+    // boş story end ------
+
+
+    const inputArr = document.querySelectorAll(".user-input");
+    
+    // for (let index = 0; index < inputArr.length; index++) {
+    //     const inputElement = inputArr[index];
+    //     inputElement.addEventListener("input", (e)=> {
+    //         console.log(e.target.value)
+    //     })
+        
+    // }
+    for (let index = 0; index < inputArr.length; index++) {
+        const inputElement = inputArr[index];
+        inputElement.addEventListener("input", (e) => {
+          const spanElement = e.target.previousElementSibling;
+          console.log(spanElement.textContent);
+        });
+      }
+
+ 
+   // console.log(storyInput);
     // console.log(processedStory);
   });
