@@ -89,7 +89,6 @@ getRawStory()
         input.classList.add("user-input");
         input.placeholder = element.pos;
         paragraph.appendChild(input);
-
       } else {
         const text = document.createElement("span");
         text.textContent = ` ${element.word} `;
@@ -104,36 +103,31 @@ getRawStory()
     document.body.appendChild(storyContainer);
     const storyParagraph = document.createElement("p");
     storyContainer.appendChild(storyParagraph);
+    const inputArr = document.querySelectorAll(".user-input");
 
-    
     for (let index = 0; index < storyInput.length; index++) {
       const element = storyInput[index];
+      if (!element.pos) {
         const text = document.createElement("span");
         text.textContent = ` ${element.word} `;
         paragraph.appendChild(text);
-      
-    }
-    // boş story end ------
-
-
-    const inputArr = document.querySelectorAll(".user-input");
-    
-    // for (let index = 0; index < inputArr.length; index++) {
-    //     const inputElement = inputArr[index];
-    //     inputElement.addEventListener("input", (e)=> {
-    //         console.log(e.target.value)
-    //     })
-        
-    // }
-    for (let index = 0; index < inputArr.length; index++) {
-        const inputElement = inputArr[index];
-        inputElement.addEventListener("input", (e) => {
-          const spanElement = e.target.previousElementSibling;
-          console.log(spanElement.textContent);
-        });
+      } else {
+        const yetToBeFilled = document.createElement("span");
+        yetToBeFilled.classList.add("yet-to-be-filled");
+        yetToBeFilled.textContent = ` ${element.word} `;
+        paragraph.appendChild(yetToBeFilled);
       }
+    }
+    const yetToBeFilledArray = document.querySelectorAll(".yet-to-be-filled");
 
- 
-   // console.log(storyInput);
-    // console.log(processedStory);
+    for (let index = 0; index < inputArr.length; index++) {
+      const inputElement = inputArr[index];
+      inputElement.addEventListener("input", (e) => {
+        const spanElement = e.target.value;
+        yetToBeFilledArray[
+          index
+        ].innerHTML = `<span class="yet-to-be-filled"> ${spanElement} </span>`;
+      });
+    }
+
   });
