@@ -75,6 +75,9 @@ function parseStory(rawStory) {
 getRawStory()
   .then(parseStory)
   .then((processedStory) => {
+
+    // edit story end ------
+
     const container = document.querySelector(".madLibsEdit");
     container.classList.add("container");
     const paragraph = document.createElement("p");
@@ -95,7 +98,7 @@ getRawStory()
       }
     }
 
-    // boş story ------
+    // edit story end ------
 
     const storyContainer = document.querySelector(".madLibsPreview");
     storyContainer.classList.add("container");
